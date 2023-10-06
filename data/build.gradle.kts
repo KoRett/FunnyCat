@@ -2,7 +2,7 @@
 plugins {
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
-    id("kotlin-kapt")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -39,9 +39,18 @@ dependencies {
 
     implementation(libs.retrofit)
     implementation(libs.retrofitConverter)
+    implementation(libs.okkhttp3)
+    implementation(libs.okkhttp3LogingInterceptor)
+
+    implementation(libs.coroutines.core)
 
     implementation(libs.dagger)
-    kapt(libs.daggerCompiler)
+    ksp(libs.daggerCompiler)
+
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    annotationProcessor(libs.room.compiler)
+    ksp(libs.room.compiler)
 
     implementation(project(":domain"))
 

@@ -2,5 +2,9 @@
     <string name="app_name">Funny Cat</string>
     <string name="settings">Settings</string>
     <string name="gallery">Gallery</string>
-    <string name="main">Main</string>
+    <string name="main">Cat</string>
+    <string name="like">Like</string>
+    <string name="error_failed_to_load_data">Error! Couldn\'t load the data!</string>
+    <string name="error_image">Error image</string>
+    <string name="camera">Camera</string>
 </resources>

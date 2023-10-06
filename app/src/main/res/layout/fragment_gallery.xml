@@ -7,6 +7,21 @@
     tools:context=".presentation.gallery.GalleryFragment">
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/bt_camera"
+        style="?attr/materialIconButtonFilledStyle"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:contentDescription="@string/settings"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/ic_camera_24"
+        app:iconGravity="textStart"
+        app:iconSize="45dp"
+        app:layout_constraintEnd_toStartOf="@id/card_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/bt_main"
         style="?attr/materialIconButtonFilledStyle"
         android:layout_width="60dp"
@@ -21,15 +36,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/name_card"
+        android:id="@+id/card_name"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginStart="100dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         app:cardBackgroundColor="?attr/colorSurfaceContainerHigh"
         app:layout_constraintEnd_toStartOf="@id/bt_main"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/bt_camera"
         app:layout_constraintTop_toTopOf="parent"
         app:strokeWidth="0dp">
 
@@ -41,5 +55,32 @@
             android:textSize="30sp" />
 
     </com.google.android.material.card.MaterialCardView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_cats"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:animateLayoutChanges="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bt_camera">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_cats"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:clipToPadding="false"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="3"
+            tools:listitem="@layout/item_cat" />
+
+        <include layout="@layout/part_result" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

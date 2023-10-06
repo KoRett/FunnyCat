@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.FunnyCat" parent="Base.Theme.FunnyCat" />
+
+    <style name="Theme.FunnyCat.TransparentStatusBarAndNavigation" parent="Theme.FunnyCat">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
 </resources>

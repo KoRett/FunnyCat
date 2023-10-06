@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.korett.funnycat.presentation.main.CatFragment"
+        android:name="com.korett.funnycat.presentation.cat.CatFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_cat">
         <action
@@ -35,5 +35,32 @@
         android:id="@+id/galleryFragment"
         android:name="com.korett.funnycat.presentation.gallery.GalleryFragment"
         android:label="fragment_gallery"
-        tools:layout="@layout/fragment_gallery"/>
+        tools:layout="@layout/fragment_gallery">
+        <action
+            android:id="@+id/action_galleryFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            />
+        <action
+            android:id="@+id/action_galleryFragment_to_galleryItemFragment"
+            app:destination="@id/galleryItemFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/stay_still"
+            app:popEnterAnim="@anim/stay_still"
+            app:popExitAnim="@anim/slide_out_bottom" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.korett.funnycat.presentation.gallery.camera.CameraFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera" />
+    <fragment
+        android:id="@+id/galleryItemFragment"
+        android:name="com.korett.funnycat.presentation.gallery.GalleryItemFragment"
+        android:label="fragment_gallery_item"
+        tools:layout="@layout/fragment_gallery_item" />
 </navigation>

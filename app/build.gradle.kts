@@ -2,7 +2,7 @@
 plugins {
     alias(libs.plugins.com.android.application)
     alias(libs.plugins.org.jetbrains.kotlin.android)
-    id("kotlin-kapt")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -45,16 +45,24 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
 
+    implementation(libs.bundles.camera)
+
     implementation(libs.fragment.ktx)
     implementation(libs.activity.ktx)
 
     implementation(libs.coroutines.core)
+    implementation(libs.coroutines.android)
+
+    implementation(libs.lifecycle.livedata.ktx)
+
+    implementation(libs.glide)
 
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
 
     implementation(libs.dagger)
-    kapt(libs.daggerCompiler)
+    implementation(libs.constraintlayout)
+    ksp(libs.daggerCompiler)
 
     implementation(project(":data"))
     implementation(project(":domain"))

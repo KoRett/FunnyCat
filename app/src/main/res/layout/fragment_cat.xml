@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.main.CatFragment">
+    tools:context=".presentation.cat.CatFragment">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bt_gallery"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/name_card"
+        android:id="@+id/card_name"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_margin="20dp"
@@ -54,19 +54,72 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/im_cat"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_cat"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="400dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="50dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:cardBackgroundColor="?attr/colorSurfaceContainerHigh"
+        app:cardCornerRadius="40dp"
+        app:layout_constraintBottom_toTopOf="@id/bt_like"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bt_gallery"
-        app:shapeAppearanceOverlay="@style/RoundedSquare" />
+        app:strokeWidth="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/card_cat_constraint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
+            android:padding="10dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/im_cat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
+            <include layout="@layout/part_result" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bt_dislike"
+        style="?attr/materialIconButtonFilledStyle"
+        android:layout_width="140dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="20dp"
+        android:contentDescription="@string/like"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/ic_sad_cat"
+        app:iconGravity="textStart"
+        app:iconSize="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/bt_like"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_cat" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bt_like"
+        style="?attr/materialIconButtonFilledStyle"
+        android:layout_width="140dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="20dp"
+        android:contentDescription="@string/like"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/ic_happy_cat"
+        app:iconGravity="textStart"
+        app:iconSize="60dp"
+        app:layout_constraintBottom_toBottomOf="@id/bt_dislike"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/bt_dislike"
+        app:layout_constraintTop_toTopOf="@id/bt_dislike" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
