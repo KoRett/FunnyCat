@@ -54,6 +54,45 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--TODO Remove input url feature-->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:hint="URL"
+        app:layout_constraintBottom_toTopOf="@id/card_cat"
+        app:layout_constraintEnd_toStartOf="@id/bt_download"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_gallery">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_input_url"
+            android:inputType="text"
+            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bt_download"
+        style="?attr/materialIconButtonFilledStyle"
+        android:layout_width="60dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="20dp"
+        app:cornerRadius="15dp"
+        app:icon="@drawable/ic_cloud_download_24"
+        app:iconGravity="textStart"
+        app:iconSize="30dp"
+        app:layout_constraintBottom_toBottomOf="@id/text_input_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/text_input_layout"
+        app:layout_constraintTop_toTopOf="@id/text_input_layout" />
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_cat"
         android:layout_width="0dp"

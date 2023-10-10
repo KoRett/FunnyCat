@@ -1,18 +1,19 @@
 package com.korett.funnycat.domain.repository
 
-import com.korett.funnycat.domain.model.Cat
+import com.korett.funnycat.domain.model.RemoteCat
 import com.korett.funnycat.domain.model.ResultModel
+import com.korett.funnycat.domain.model.SavedCat
 import kotlinx.coroutines.flow.Flow
 import java.io.File
 
 interface CatRepository {
 
-    fun getCatsInternet(number: Int): Flow<ResultModel<List<Cat>>>
+    fun getRemoteCats(number: Int): Flow<ResultModel<List<RemoteCat>>>
 
-    fun getCatsLocal(): Flow<ResultModel<List<Cat>>>
+    fun getSavedCats(): Flow<ResultModel<List<SavedCat>>>
 
-    suspend fun getCatCount(): Long
+    suspend fun saveCat(remoteCat: RemoteCat, date: Long, isLocal: Boolean)
 
-    suspend fun saveCatLocal(cat: Cat, date: Long, isLocal: Boolean)
     suspend fun getImageFile(): File
+
 }

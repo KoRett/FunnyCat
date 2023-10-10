@@ -57,6 +57,7 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 com-android-application = { id = "com.android.application", version.ref = "agp" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
 com-android-library = { id = "com.android.library", version.ref = "agp" }
+androidx-navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "navigation" }
 
 [bundles]
 camera = ["camera-core", "camera-camera2", "camera-extensions", "camera-lifecycle", "camera-view"]

@@ -44,6 +44,10 @@ class GalleryFragment : Fragment() {
     ): View {
         _binding = FragmentGalleryBinding.inflate(inflater, container, false)
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val navController = findNavController()
 
         binding.btMain.setOnClickListener {
@@ -63,14 +67,23 @@ class GalleryFragment : Fragment() {
                 val adapter = GalleryAdapter(data)
                 adapter.setOnItemClickListener(object : GalleryAdapter.OnItemClickListener {
                     override fun onItemClick(position: Int) {
-                        navController.navigate(R.id.action_galleryFragment_to_galleryItemFragment)
+                        val galleryItemDestination =
+                            GalleryFragmentDirections.actionGalleryFragmentToGalleryItemFragment(
+                                data[position].imagePath,
+                                data[position].date
+                            )
+                        navController.navigate(galleryItemDestination)
                     }
                 })
                 binding.recyclerviewCats.adapter = adapter
             })
         }
 
-        return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        vm.getCat()
     }
 
     private fun checkCameraPermission(): Boolean = ContextCompat.checkSelfPermission(

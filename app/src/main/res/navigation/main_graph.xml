@@ -60,7 +60,15 @@
         tools:layout="@layout/fragment_camera" />
     <fragment
         android:id="@+id/galleryItemFragment"
-        android:name="com.korett.funnycat.presentation.gallery.GalleryItemFragment"
+        android:name="com.korett.funnycat.presentation.gallery.description.GalleryItemFragment"
         android:label="fragment_gallery_item"
-        tools:layout="@layout/fragment_gallery_item" />
+        tools:layout="@layout/fragment_gallery_item" >
+        <argument
+            android:name="imagePath"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="date"
+            app:argType="long" />
+    </fragment>
 </navigation>

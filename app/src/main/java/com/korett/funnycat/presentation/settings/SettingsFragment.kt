@@ -37,6 +37,10 @@ class SettingsFragment : Fragment() {
     ): View {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.btMain.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -52,8 +56,6 @@ class SettingsFragment : Fragment() {
         }
 
         setCurrentActiveThemeButton()
-
-        return binding.root
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)

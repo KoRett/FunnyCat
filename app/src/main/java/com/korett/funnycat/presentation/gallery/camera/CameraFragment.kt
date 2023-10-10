@@ -54,6 +54,11 @@ class CameraFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCameraBinding.inflate(inflater, container, false)
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
 
         cameraProviderFuture.addListener({
@@ -76,8 +81,6 @@ class CameraFragment : Fragment() {
             if (result is ErrorResultModel)
                 Toast.makeText(requireContext(), "Error! Can't save the image!", Toast.LENGTH_SHORT).show()
         }
-
-        return binding.root
     }
 
     override fun onResume() {

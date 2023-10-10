@@ -40,6 +40,11 @@ class CatFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCatBinding.inflate(inflater, container, false)
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val navController = findNavController()
 
         binding.btSettings.setOnClickListener {
@@ -59,17 +64,18 @@ class CatFragment : Fragment() {
             vm.getCat()
         }
 
-        return binding.root
-    }
+        binding.btDownload.setOnClickListener {
+            vm.downloadImageFromPath(binding.textInputUrl.text.toString())
+        }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         loadCat()
     }
 
     private fun loadCat() {
         vm.catsResult.observe(viewLifecycleOwner) { result ->
             renderedSimpleResult(binding.cardCatConstraint, result, onSuccess = {
+                binding.textInputUrl.setText(it[0].imagePath)
+
                 val a: TypedArray = requireContext().obtainStyledAttributes(
                     TypedValue().data,
                     intArrayOf(android.R.attr.colorAccent)

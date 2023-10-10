@@ -1,7 +1,8 @@
 package com.korett.funnycat.domain.model
 
-data class Cat(
+data class SavedCat(
     val id: String,
     val imagePath: String,
-    val isLocal: Boolean
+    val isLocal: Boolean,
+    val date: Long
 )

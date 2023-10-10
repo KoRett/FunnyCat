@@ -4,10 +4,11 @@ import com.korett.funnycat.data.storage.CatService
 import com.korett.funnycat.data.storage.ImageStorage
 import com.korett.funnycat.data.storage.database.dao.CatDao
 import com.korett.funnycat.data.storage.database.entities.CatEntity
-import com.korett.funnycat.domain.model.Cat
+import com.korett.funnycat.domain.model.RemoteCat
 import com.korett.funnycat.domain.model.ErrorResultModel
 import com.korett.funnycat.domain.model.PendingResultModel
 import com.korett.funnycat.domain.model.ResultModel
+import com.korett.funnycat.domain.model.SavedCat
 import com.korett.funnycat.domain.model.SuccessResultModel
 import com.korett.funnycat.domain.repository.CatRepository
 import kotlinx.coroutines.Dispatchers
@@ -25,9 +26,8 @@ class CatRepositoryImpl @Inject constructor(
     private val imageStorage: ImageStorage
 ) : CatRepository {
 
-    override fun getCatsInternet(number: Int) = flow<ResultModel<List<Cat>>> {
+    override fun getRemoteCats(number: Int) = flow<ResultModel<List<RemoteCat>>> {
         emit(PendingResultModel())
-
         val response = catService.getCats(number)
         if (response.isSuccessful) {
             val cats = response.body()!!.map { it.mapToDomain() }
@@ -37,14 +37,22 @@ class CatRepositoryImpl @Inject constructor(
         }
     }.flowOn(Dispatchers.IO)
 
-    override suspend fun getCatCount() = catDao.getCatCount().toLong()
-
-    override fun getCatsLocal() = flow<ResultModel<List<Cat>>> {
+    override fun getSavedCats() = flow<ResultModel<List<SavedCat>>> {
         emit(PendingResultModel())
         try {
-            val cats = catDao.getCats().map { it.toDomain() }
+            val catsRemote = catDao.getCats().map { it.mapToSavedCat() }
+            val catsLocal = imageStorage.getAllImageFiles()
+                ?.map {
+                    SavedCat(
+                        id = it.nameWithoutExtension,
+                        imagePath = it.path,
+                        isLocal = true,
+                        date = it.lastModified()
+                    )
+                }
+            val allCats = catsRemote.plus(catsLocal!!).sortedByDescending { it.date }
             delay(500L)
-            emit(SuccessResultModel(cats))
+            emit(SuccessResultModel(allCats))
         } catch (e: Exception) {
             emit(ErrorResultModel(e))
         }
@@ -52,9 +60,14 @@ class CatRepositoryImpl @Inject constructor(
 
     override suspend fun getImageFile() = imageStorage.createImageOutputFile()
 
-    override suspend fun saveCatLocal(cat: Cat, date: Long, isLocal: Boolean) {
+    override suspend fun saveCat(remoteCat: RemoteCat, date: Long, isLocal: Boolean) {
         val catEntity =
-            CatEntity(id = cat.id, imagePath = cat.imagePath, date = date, isLocal = isLocal)
+            CatEntity(
+                id = remoteCat.id,
+                imagePath = remoteCat.imagePath,
+                date = date,
+                isLocal = isLocal
+            )
         catDao.addCat(catEntity)
     }
 

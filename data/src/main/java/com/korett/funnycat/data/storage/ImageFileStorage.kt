@@ -21,5 +21,8 @@ class ImageFileStorage internal constructor(private val rootDirectory: File) : I
 
     override suspend fun createImageOutputFile(): File = File(rootDirectory, generateFilename())
 
+    override suspend fun getAllImageFiles(): List<File>? =
+        rootDirectory.listFiles()?.sortedByDescending { it.lastModified() }
+
     private fun generateFilename(): String = UUID.randomUUID().toString() + PHOTO_EXTENSION
 }

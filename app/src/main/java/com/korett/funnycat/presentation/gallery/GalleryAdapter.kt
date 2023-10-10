@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.korett.funnycat.databinding.ItemCatBinding
-import com.korett.funnycat.domain.model.Cat
+import com.korett.funnycat.domain.model.SavedCat
 
 
-class GalleryAdapter(private val dataSet: List<Cat>) :
+class GalleryAdapter(private val dataSet: List<SavedCat>) :
     RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
 
     private var listener: OnItemClickListener? = null

@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.korett.funnycat.data.storage.database.entities.CatEntity.Companion.TABLE_NAME
-import com.korett.funnycat.domain.model.Cat
+import com.korett.funnycat.domain.model.SavedCat
 
 @Entity(tableName = TABLE_NAME)
 data class CatEntity(
@@ -14,8 +14,13 @@ data class CatEntity(
     @ColumnInfo(name = "is_local") val isLocal: Boolean
 ) {
 
-    fun toDomain(): Cat {
-        return Cat(id = this.id, imagePath = this.imagePath, isLocal = this.isLocal)
+    fun mapToSavedCat(): SavedCat {
+        return SavedCat(
+            id = this.id,
+            imagePath = this.imagePath,
+            isLocal = this.isLocal,
+            date = this.date
+        )
     }
 
     companion object {
