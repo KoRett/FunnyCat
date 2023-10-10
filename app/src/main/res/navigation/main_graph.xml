@@ -67,8 +67,5 @@
             android:name="imagePath"
             app:argType="string"
             app:nullable="true" />
-        <argument
-            android:name="date"
-            app:argType="long" />
     </fragment>
 </navigation>

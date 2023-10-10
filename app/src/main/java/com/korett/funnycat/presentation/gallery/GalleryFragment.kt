@@ -69,8 +69,7 @@ class GalleryFragment : Fragment() {
                     override fun onItemClick(position: Int) {
                         val galleryItemDestination =
                             GalleryFragmentDirections.actionGalleryFragmentToGalleryItemFragment(
-                                data[position].imagePath,
-                                data[position].date
+                                data[position].imagePath
                             )
                         navController.navigate(galleryItemDestination)
                     }

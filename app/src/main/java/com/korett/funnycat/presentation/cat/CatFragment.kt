@@ -64,18 +64,12 @@ class CatFragment : Fragment() {
             vm.getCat()
         }
 
-        binding.btDownload.setOnClickListener {
-            vm.downloadImageFromPath(binding.textInputUrl.text.toString())
-        }
-
         loadCat()
     }
 
     private fun loadCat() {
         vm.catsResult.observe(viewLifecycleOwner) { result ->
             renderedSimpleResult(binding.cardCatConstraint, result, onSuccess = {
-                binding.textInputUrl.setText(it[0].imagePath)
-
                 val a: TypedArray = requireContext().obtainStyledAttributes(
                     TypedValue().data,
                     intArrayOf(android.R.attr.colorAccent)

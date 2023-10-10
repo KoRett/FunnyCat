@@ -1,6 +1,5 @@
 package com.korett.funnycat.presentation.gallery.description
 
-import android.annotation.SuppressLint
 import android.content.res.TypedArray
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -14,8 +13,6 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.korett.funnycat.databinding.FragmentGalleryItemBinding
-import java.text.SimpleDateFormat
-import java.util.Date
 
 
 class GalleryItemFragment : Fragment() {
@@ -24,10 +21,6 @@ class GalleryItemFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val args by navArgs<GalleryItemFragmentArgs>()
-
-    companion object {
-        private const val DATE_FORMAT = "dd-MM-yyyy-HH:mm:ss"
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,11 +50,6 @@ class GalleryItemFragment : Fragment() {
             .transition(DrawableTransitionOptions.withCrossFade())
             .placeholder(placeholder)
             .into(binding.imCat)
-
-        binding.textDate.text = getDate(args.date)
     }
-
-    @SuppressLint("SimpleDateFormat")
-    private fun getDate(date: Long): String = SimpleDateFormat(DATE_FORMAT).format(Date(date))
 
 }
