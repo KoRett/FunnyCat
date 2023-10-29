@@ -7,9 +7,13 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.korett.funnycat.app.App
 import com.korett.funnycat.databinding.ActivityMainBinding
+import com.korett.funnycat.model.NotificationWorker
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import java.time.Duration
 import javax.inject.Inject
 import javax.inject.Provider
 
@@ -66,6 +70,18 @@ class MainActivity : AppCompatActivity() {
                     WindowInsetsControllerCompat.BEHAVIOR_SHOW_BARS_BY_TOUCH
             }
         }, IMMERSIVE_FLAG_TIMEOUT)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        createNotificationWork()
+    }
+
+    private fun createNotificationWork() {
+        val workRequest = OneTimeWorkRequestBuilder<NotificationWorker>()
+            .setInitialDelay(Duration.ofSeconds(5))
+            .build()
+        WorkManager.getInstance(applicationContext).enqueue(workRequest)
     }
 
 }

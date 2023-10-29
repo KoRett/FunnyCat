@@ -3,7 +3,6 @@ package com.korett.funnycat.presentation.gallery
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.korett.funnycat.domain.model.RemoteCat
 import com.korett.funnycat.domain.model.SavedCat
 import com.korett.funnycat.domain.usecase.GetSavedCatsUseCase
 import com.korett.funnycat.model.LiveResult
@@ -19,7 +18,6 @@ class GalleryViewModel(private val getSavedCatsUseCase: GetSavedCatsUseCase) : V
     val catsResult: LiveResult<List<SavedCat>> = catsMutableResult
 
     private var getCatsJob: Job? = null
-
 
     fun getCat() {
         getCatsJob?.cancel()

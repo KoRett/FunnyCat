@@ -20,6 +20,7 @@ livedata-ktx = "2.6.2"
 camera = "1.2.3"
 constraintlayout = "2.1.4"
 room = "2.5.2"
+work-ktx = "2.8.1"
 
 
 [libraries]
@@ -52,6 +53,7 @@ constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayo
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "work-ktx" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }

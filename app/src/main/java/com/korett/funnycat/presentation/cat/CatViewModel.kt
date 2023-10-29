@@ -7,7 +7,7 @@ import com.korett.funnycat.domain.model.RemoteCat
 import com.korett.funnycat.domain.model.SuccessResultModel
 import com.korett.funnycat.domain.model.takeSuccess
 import com.korett.funnycat.domain.usecase.GetCatsInternetUseCase
-import com.korett.funnycat.domain.usecase.SaveCatUseCase
+import com.korett.funnycat.domain.usecase.SaveRemoteCatUseCase
 import com.korett.funnycat.model.LiveResult
 import com.korett.funnycat.model.MutableLiveResult
 import kotlinx.coroutines.Dispatchers
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 class CatViewModel(
     private val getCatsInternetUseCase: GetCatsInternetUseCase,
-    private val saveCatUseCase: SaveCatUseCase
+    private val saveRemoteCatUseCase: SaveRemoteCatUseCase
 ) : ViewModel() {
 
     private val catsMutableResult: MutableLiveResult<List<RemoteCat>> = MutableLiveResult()
@@ -44,18 +44,18 @@ class CatViewModel(
         saveCatJob?.cancel()
         saveCatJob = viewModelScope.launch(Dispatchers.IO) {
             if (catsResult.value is SuccessResultModel)
-                saveCatUseCase(catsResult.value.takeSuccess()!![0], date, isLocal = false)
+                saveRemoteCatUseCase(catsResult.value.takeSuccess()!![0], date, isLocal = false)
         }
     }
 
     class Factory @Inject constructor(
         private val getCatsInternetUseCase: GetCatsInternetUseCase,
-        private val saveCatUseCase: SaveCatUseCase
+        private val saveRemoteCatUseCase: SaveRemoteCatUseCase
     ) :
         ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return CatViewModel(getCatsInternetUseCase, saveCatUseCase) as T
+            return CatViewModel(getCatsInternetUseCase, saveRemoteCatUseCase) as T
         }
     }
 }

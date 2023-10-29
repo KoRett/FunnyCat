@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import java.io.File
 import java.lang.Exception
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -58,9 +59,13 @@ class CatRepositoryImpl @Inject constructor(
         }
     }.flowOn(Dispatchers.IO)
 
-    override suspend fun getImageFile() = imageStorage.createImageOutputFile()
+    override suspend fun getImageFile() = imageStorage.getTemporaryImageOutputFile()
 
-    override suspend fun saveCat(remoteCat: RemoteCat, date: Long, isLocal: Boolean) {
+    override suspend fun deleteAllTemporaryImages() = imageStorage.deleteAllTemporaryImages()
+
+    override suspend fun saveImage(tmpImage: File) = imageStorage.moveImageFileToRoot(tmpImage)
+
+    override suspend fun saveRemoteCat(remoteCat: RemoteCat, date: Long, isLocal: Boolean) {
         val catEntity =
             CatEntity(
                 id = remoteCat.id,

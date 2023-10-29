@@ -54,6 +54,8 @@ dependencies {
     implementation(libs.coroutines.core)
     implementation(libs.coroutines.android)
 
+    implementation(libs.work.runtime.ktx)
+
     implementation(libs.lifecycle.livedata.ktx)
 
     implementation(libs.glide)

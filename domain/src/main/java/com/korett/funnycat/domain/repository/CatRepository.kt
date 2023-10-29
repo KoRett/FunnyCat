@@ -12,8 +12,10 @@ interface CatRepository {
 
     fun getSavedCats(): Flow<ResultModel<List<SavedCat>>>
 
-    suspend fun saveCat(remoteCat: RemoteCat, date: Long, isLocal: Boolean)
+    suspend fun saveRemoteCat(remoteCat: RemoteCat, date: Long, isLocal: Boolean)
 
     suspend fun getImageFile(): File
 
+    suspend fun deleteAllTemporaryImages(): Unit?
+    suspend fun saveImage(tmpImage: File)
 }
